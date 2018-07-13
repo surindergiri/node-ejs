@@ -1,0 +1,38 @@
+<% include header %>
+    <br>
+    <br>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">            
+                <div class="form-group form-check">
+                    <input class="form-check-input" id="chkBox" type="checkbox" name="enable" >
+                    <label class="form-check-label" for="exampleCheck1">Enable google authentication</label>                    
+                </div>
+                <div class="form-group form-check">
+                    <button id="btn_request" type="submit" class="btn sml btn-success" name="btn-enable">Submit</button>
+                </div>
+            </div>
+
+            <div class="col-md-4" id="qrBlock">
+                <div class="form-group form-check">
+                    <label>Scan this QRCode using "Google Authenticator App" and enter 6 digit code to enable it</label>    
+                    <img id="qr_img" src="">
+                </div>
+                <div class="form-group form-check">
+                    <label>Enter token</label>
+                    <input placeholder="Enter token" class="form-control" type="text" name="passcode" id="passcode" value="">
+                    <br/>
+                    <label>Secret</label>
+                    <input class="form-control" type="text" disabled value="" id="secret">
+                </div>
+                <div class="form-group form-check">
+                    <button id="btn_verify" type="submit" class="btn sml btn-success" name="btn-enable">Enable</button>
+                    
+                    <div id="res" style="display:  inline-block; padding: 5px;background: #eee;     margin-left:  20px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+<% include footer %>

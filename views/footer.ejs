@@ -1,0 +1,54 @@
+
+<style>
+    #qrBlock{display: none;}
+</style>
+    <script>
+        $(()=>{
+            $("#btn_request").on("click",()=>{
+                var cVal = $("#chkBox");
+                if($(cVal).is(":checked")){
+                    var objEnable = {"action":"enable"}
+                    $.post('http://localhost:3000/generate_key',objEnable,(data)=>{
+                        var newData = JSON.stringify(data)
+                        var obj = JSON.parse(newData);
+                        var qrImg = obj.qrImgUrl;
+                        var secret = obj.secret;
+
+                        $("#qrBlock").show();
+                        $("#secret").val(secret);
+                        $("#qr_img").attr('src',qrImg);
+                    })
+                }
+            })
+
+            $("#btn_verify").on("click",()=>{
+                var passcode = $("#passcode").val();
+                var secret = $("#secret").val();
+                var objEnable = {"action":"enable","token":passcode,"secret":secret}
+                $.post('http://localhost:3000/verify',objEnable,(data)=>{
+                    var newData = JSON.stringify(data)
+                    var obj = JSON.parse(newData);
+                    if( obj.status == true ){
+                        $("#res").html("valid token")
+                    }else{
+                        $("#res").html("Invalid token")
+                    }
+                    //console.log(obj);                    
+                })                
+            })
+        })
+        </script>
+
+
+        <footer class="footer text-faded text-center py-5">
+            <div class="container">
+                <p class="m-0 small">Copyright &copy; Your Website 2018</p>
+            </div>
+        </footer>
+  
+        <!-- Bootstrap core JavaScript -->
+        <script src="/jquery/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  
+    </body>  
+  </html>
